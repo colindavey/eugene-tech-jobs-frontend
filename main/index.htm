@@ -6,7 +6,9 @@
 	<!-- Bootstrap stuff. WP has this too -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Latest compiled and minified CSS -->
+<!-- 	this line necessary for glyphs -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
@@ -29,18 +31,21 @@
 <!-- Uncomment for WP -->
 <!-- 
 		<table class="center">
-			<tr>
-				<td>
-					<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/logo.png" style="zoom:70%" >
-				</td>
-				<td>
-					<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/stamp_made_white.png" >
-				</td>
-			</tr>
+			<tbody>
+				<tr>
+					<td>
+						<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/logo.png" style="zoom:70%" >
+					</td>
+					<td>
+						<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/stamp_made_white.png" >
+					</td>
+				</tr>
+			</tbody>
 		</table>
  -->
 		<h1>Companies <span id="numCompanies"></span> Jobs <span id="numJobs"></span></h1>
-		<div class=".container-fluid">
+		<input type = "checkbox" id ="chkHiring" onclick="toggleHiring()">Hiring only
+		<div class="container-fluid">
 			<ul id="jobsList">
 			</ul>
 		</div>
