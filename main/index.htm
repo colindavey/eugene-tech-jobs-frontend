@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+	<!-- WP does this so we don't have to. -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="tabletop.js"></script>
+	<!-- Bootstrap stuff. WP has this too -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<!-- 
+		For WP: 
+		-- copy the contents of myscript.js and paste into the script section of
+		Scripts n Styles
+		-- copy the contents of mycss.js  and paste into the styles section of
+		Scripts n Styles
+	 -->
+	<script type="text/javascript" src="myscript.js"></script>
+	<link rel="stylesheet" type="text/css" href="mystyle.css" />
+</head>
+<body>
+
+<!-- WP piece -->
+<div class="home-hero container" >
+	<div class="center">
+<!-- Uncomment for WP -->
+<!-- 
+		<table class="center">
+			<tr>
+				<td>
+					<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/logo.png" style="zoom:70%" >
+				</td>
+				<td>
+					<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/stamp_made_white.png" >
+				</td>
+			</tr>
+		</table>
+ -->
+		<h1>Companies <span id="numCompanies"></span> Jobs <span id="numJobs"></span></h1>
+		<div class=".container-fluid">
+			<ul id="jobsList">
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- END WP piece -->
+	
+<body>

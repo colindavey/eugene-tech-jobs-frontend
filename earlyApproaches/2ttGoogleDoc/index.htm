@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="tabletop.js"></script>
+<script type="text/javascript">
+
+	$( document ).ready(function() {
+		var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/10plQlO7bPpGm-IsXR53Lxxcr5a4z4J31JczBX28G6os/pubhtml';
+		Tabletop.init( { key: public_spreadsheet_url,
+					 callback: updateDOM,
+					 simpleSheet: true } )
+	});
+
+  	function updateDOM(data, tabletop) {
+  		var numCompanies = data.length;
+  		var numJobs = 0;
+  		var item;
+  		for (var i = 0; i < numCompanies; i++) {
+			numJobs += Number(data[i].openjobcount);
+			item = '<li>';
+			if (data[i].link === "") {
+				item += data[i].employer;
+			} else {
+				item += '<a href="';
+				item += data[i].link;
+				item += '" TARGET="link">';
+				item += data[i].employer;
+				item += '</a>';
+			}
+			item += ' ';
+			item += data[i].openjobcount;
+			item += '</li>';
+			$("#jobsList").append(item);
+		}
+		$("#numCompanies").text(numCompanies);
+		$("#numJobs").text(numJobs);
+	}
+</script>
+<html>
+<head>
+	<TITLE>Eugene Tech Jobs</TITLE>
+</head>
+<body>
+	<h1>Eugene Tech Jobs</H1>
+	<h2>Companies <span id="numCompanies"></span> Jobs <span id="numJobs"></span></h2>
+	<ul id="jobsList">
+	</ul>
+</body>
+</html>

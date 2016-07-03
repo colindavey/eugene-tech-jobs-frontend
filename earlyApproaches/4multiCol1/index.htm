@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+	<!-- WP does this so we don't have to. -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src="tabletop.js"></script>
+
+	<!-- 
+		For WP: 
+		-- copy the contents of myscript.js and paste into the script section of
+		Scripts n Styles
+		-- copy the contents of mycss.js  and paste into the styles section of
+		Scripts n Styles
+	 -->
+	<script type="text/javascript" src="myscript.js"></script>
+	<link rel="stylesheet" type="text/css" href="mystyle.css" />
+</head>
+<body>
+	<!-- WP piece -->
+	<div class="home-hero container" >
+		<div class="center">
+	<!-- Uncomment for WP -->
+	<!-- 
+			<table class="center">
+				<tr>
+					<td>
+						<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/logo.png" style="zoom:70%" >
+					</td>
+					<td>
+						<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/stamp_made_white.png" >
+					</td>
+				</tr>
+			</table>
+	 -->
+			<h2>Companies <span id="numCompanies"></span> Jobs <span id="numJobs"></span></h2>
+			<!-- Funny formatting of this line makes WP work better -->
+	<!-- 		<div class="center"> -->
+				<span>number of columns:</span><a href="javascript:changeNumColumns(1)">1  </a> <a href="javascript:changeNumColumns(2)">2  </a> <a href="javascript:changeNumColumns(3)">3  </a><br><br>
+	<!-- 		</div> -->
+			<div id="jobs">
+				<ul id="jobsList">
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>

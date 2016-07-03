@@ -1,0 +1,29 @@
+.center {
+	text-align: center;
+}
+
+ul {
+	padding:0;
+}
+
+li {
+	list-style: none;
+	padding:	0;
+/* 	WP doesn't need this:  */
+/* 	text-align: center; */
+}
+
+li.leaf, li.collapsed, li.expanded {
+	list-style-image: none;
+}
+
+table.center {
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+img {
+	max-width: 100%; 
+	height: auto;
+	width: 150px;
+}

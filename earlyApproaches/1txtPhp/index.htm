@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<?php include "eugenetech.php"; ?>
+<html>
+<head>
+	<TITLE>Eugene Tech Jobs</TITLE>
+</head>
+<body>
+	<h1>Eugene Tech Jobs</H1>
+	<h2>Companies <?php etGetNumCompanies() ?> Jobs <?php etGetNumJobs() ?></h2>
+	<ul>
+		<?php etGetJobsList() ?>
+	</ul>
+</body>
+</html>
