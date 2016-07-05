@@ -1,38 +1,77 @@
-.center {
-	text-align: center;
+/* 
+@media (max-width: 991px) {
+    .jobs-container {
+        margin: 0 2em
+    }
 }
 
-/* 
-.highlight {
-	color: red;
-	background: #ddd;
+img.eugtech-logo {
+    max-width: 105px;
+    margin: 10px 10px 0 0
+}
+
+img.shire-logo {
+    max-height: 125px;
+    margin: 0 0 0 10px;
+    width: auto
+}
+
+@media (max-width: 480px) {
+    img.eugtech-logo {
+        max-width: 85px
+    }
+    img.shire-logo {
+        max-height: 105px
+    }
 }
  */
 
-ul {
-	padding:0;
+#jobslist {
+/* 
+	margin-left: 20em;
+	margin-right: 20em;
+	padding-left: 20em;
+	padding-right: 20em;
+ */
 }
 
-li {
-	list-style: none;
-	padding:	0;
-	text-align: left;
+.center {
+/* 
+	margin-left: 5em;
+	margin-right: 5em;
+	padding-left: 5em;
+	padding-right: 5em;
+ */
+	text-align: center;
+}
+
+.hiring-toggle {
+    font-size: 120%;
+    margin-bottom: 1.5em
+}
+
+.hiring-toggle input {
+    margin-right: 10px
+}
+
+#jobsList {
+    text-align: left
+}
+
+.company-item {
 	height: 3em;
-	overflow: hidden;
-	text-overflow: hidden;
+    border-radius: 10px;
 }
 
-li.leaf, li.collapsed, li.expanded {
-	list-style-image: none;
+.company-item:hover {
+    background-color: rgba(0, 0, 0, 0.5)
 }
 
-table.center {
-	margin-left:auto; 
-	margin-right:auto;
+/* Needed to center the dash under the label when there are no jobs */
+.no-openings {
+    font-size: 75%;
+    padding: .2em .6em .3em
 }
 
-img {
-	max-width: 100%; 
-	height: auto;
-	width: 150px;
+.company-job-openings {
 }

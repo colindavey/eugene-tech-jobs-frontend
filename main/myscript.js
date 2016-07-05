@@ -1,12 +1,3 @@
-// jQuery(document).ready(function() {
-// 	var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/10plQlO7bPpGm-IsXR53Lxxcr5a4z4J31JczBX28G6os/pubhtml';
-// 	Tabletop.init({
-// 		key: public_spreadsheet_url, 
-// 		callback: initDataDOM, 
-// 		simpleSheet: true 
-// 	});
-// });
-
 jQuery(document).ready(function() {
 	var spreadsheetJson = 'https://spreadsheets.google.com/feeds/list/10plQlO7bPpGm-IsXR53Lxxcr5a4z4J31JczBX28G6os/od6/public/values?alt=json';
     data = [];
@@ -25,131 +16,91 @@ jQuery(document).ready(function() {
     });
 });
 
-var jobsGlobal = [];
-var jobsFilteredGlobal = [];
+var companiesHtml;
+var companiesHiringHtml;
+var numCompanies;
+var numCompaniesHiring;
 
 function toggleHiring() {
 	jQuery("#jobsList").empty();
 	updateDOM();
 }
 
-function myCompare(a,b) {
-  var nameA = a.name.toUpperCase(); // ignore upper and lowercase
-  var nameB = b.name.toUpperCase(); // ignore upper and lowercase
-//console.log(nameA + " " + nameB);
-  if (nameA < nameB) {
-//console.log('<');
-    return -1;
-  }
-  if (nameA > nameB) {
-//console.log('>');
-    return 1;
-  }
+function initDataDOM(data) {
+    // alpha sort by name
+    var companies = _(data).sortBy(function(company){
+        return company.name.toUpperCase();
+    });
+    // filter for hiring companies
+	var companiesHiring = _(companies).filter(function(entry){
+        return (entry.openings);
+    });
 
-  // names must be equal
-//console.log('=');
-  return 0;
-}
-
-function initDataDOM(data, tabletop) {
-//	data = data.slice(0, 30);
-//	data.sort(function(a,b){return myCompare(a,b)});
-	data.sort(myCompare);
-//	console.log(JSON.stringify(data));
- 	var numJobs = 0;
- 	numJobsFilteredGlobal = 0;
-	var job;
-	for (var i = 0; i < data.length; i++) {
-		var tmpNumJobs = Number(data[i].openings);
-		numJobs += tmpNumJobs;
-		// Not using tmpNumJobs here because need to distinguish between 0 and "". 
-		job = makeItem(data[i].name, data[i].link, data[i].openings, i+1);
-
-		jobsGlobal[jobsGlobal.length] = job;
-		if (tmpNumJobs > 0) {
-			jobsFilteredGlobal[jobsFilteredGlobal.length] = job;
-		}
+    numCompanies = companies.size();
+    numCompaniesHiring = companiesHiring.size();
+    
+	// To allow experimenting with grouping by rows, although it doesn't allow three columns
+    var tryRows_b = false;
+    if (!tryRows_b) {
+		companiesHtml = companies.reduce(function(carry, jobsGroup){
+			return carry + makeItem(jobsGroup, tryRows_b);
+		}, '');
+		companiesHiringHtml = companiesHiring.reduce(function(carry, jobsGroup){
+			return carry + makeItem(jobsGroup, tryRows_b);
+		}, '');
+	} else {
+		companiesHtml = companies.chunk(4).reduce(function(carry, jobsGroup){
+			return carry + makeRow(jobsGroup);
+		}, '');
+		companiesHiringHtml = companiesHiring.chunk(4).reduce(function(carry, jobsGroup){
+			return carry + makeRow(jobsGroup);
+		}, '');
 	}
-	jQuery("#numJobs").text(numJobs);
+
+    jQuery("#numJobs").text(companies.sumBy('openings'));
 	updateDOM();
 }
 
 function updateDOM() {
 	if (jQuery("#chkHiring").prop("checked")) {
-		var jobs = jobsFilteredGlobal;
+		jQuery("#numCompanies").text(numCompaniesHiring);
+		jQuery("#jobsList").append(companiesHiringHtml);
 	} else {
-		var jobs = jobsGlobal;
+		jQuery("#numCompanies").text(numCompanies);
+		jQuery("#jobsList").append(companiesHtml);
 	}
-	
-	var numCompanies = jobs.length;
-	for (var i = 0; i < numCompanies; i++) {
-		jQuery("#jobsList").append(jobs[i]);
-	}
-	jQuery("#numCompanies").text(numCompanies);
 }
 
-// makes and item that can be 0, 2, 3, or 4 columns. 
-// plus attempts to control space within item. 
-function makeItem(name, link, openings, ind) {
-	item = '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-// 	item = '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-lg-2">';
+function makeRow(companyGroup){
+    return '<div class="row">'+_(companyGroup).reduce(function(result, company){
+        return result + makeItem(company, true);
+    },'')+'</div>';
+}
 
-// 	item += '<div class="row">';
-// 	item += '<div class="clearfix">';
-	
-//  item += '<div class="col-xs-1">';
-// 	item += ind.toString() + ") ";
-// 	item += "*";
+function makeItem(company, tryRows_b) {
+	if (!tryRows_b) {
+		item = '<article class="company-item col-sm-6 col-md-4 col-lg-3"><div>';
+	} else {
+		item = '<article class="company-item col-sm-6 col-md-3"><div>';
+	}
 
-//  item += '<div class="col-xs-2 text-center">';
-// 	item += '<span class="glyphicons glyphicons-hand-right" aria-hidden="true"></span>';
-// 	item += '</div>';
-	item += '<div class="col-xs-1 text-center">';
+	item += '<div class="col-xs-1">';
 	item += '<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>';
 	item += '</div>';
 
 	item += '<div class="col-xs-9">';
+// 	item += '<div class="col-xs-8">';
 // 	item += '<div class="col-xs-10">';
-	if (link === "") {
-		item += name;
-	} else {
-		item += '<a href="'; item += link; item += '" TARGET="link">';
-		item += name;
-		item += '</a>';
-	}
+	item += (company.link ? '<a href="' + company.link + '" target="link">' + company.name + '</span></a>' : company.name);
 	item += '</div>';
 
-// 	item += '<div class="col-xs-4">';
  	item += '<div class="col-xs-1">';
-	item += '<span class="highlight">';
-	if (openings === "") {
-		item += "-";
-	} else {
-		item += openings;
-	}
-	item += '</span>';
+//  	item += '<div class="col-xs-2">';
+// 	item += '<div class="col-xs-4">';
+	item += '<span class="company-job-openings">' + (company.openings ? '<span class="label label-primary">' + company.openings+'</span>' : '<span class="no-openings">&#8211;</span>') + '</span>';
+// 	item += '<span>' + (company.openings ? '<span class="label label-primary">' + company.openings+'</span>' : '<span>&#8211;</span>') + '</span>';
 	item += '</div>';
 
-//  	item += '</div>';
-
-	item += '</li>';
+	item += '</div></article>';
 	return item;
 }
-
-// makes and item that can be 0, 2, 3, or 4 columns. 
-// function makeItem(name, link, openings, ind) {
-// 	item = '<li class="col-xs-12 col-sm-6 col-md-4 col-lg-3">';
-// 	if (link === "") {
-// 		item += name;
-// 	} else {
-// 		item += '<a href="'; item += link; item += '" TARGET="link">';
-// 		item += name;
-// 		item += '</a>';
-// 	}
-// 	item += ' ';
-// 	item += '<span class="highlight">';
-// 	item += openings;
-// 	item += '</span>';
-// 	item += '</li>';
-// 	return item;
-// }

@@ -3,6 +3,7 @@
 	<!-- WP does this so we don't have to. -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
+<!-- 	<script src="tabletop.js"></script> -->
 	<!-- Bootstrap stuff. WP has this too -->
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,29 +27,23 @@
 <body>
 
 <!-- WP piece -->
-<div class="home-hero container" >
-	<div class="center">
+<div class="center">
 <!-- Uncomment for WP -->
 <!-- 
-		<table class="center">
-			<tbody>
-				<tr>
-					<td>
-						<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/logo.png" style="zoom:70%" >
-					</td>
-					<td>
-						<img src="http://eugenetech.org/wp-content/themes/eugenetech_2015/img/stamp_made_white.png" >
-					</td>
-				</tr>
-			</tbody>
-		</table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12" style="text-align: center">
+                <a href="/"><img src="/wp-content/themes/eugenetech_2015/img/logo.png" alt="Eugene Tech" class="eugtech-logo"></a><a href="https://siliconshire.org/" target="_blank"><img src="/wp-content/themes/eugenetech_2015/img/stamp_made_white_crop.png" alt="Made in the Silicon Shire" class="shire-logo"></a>
+            </div>
+        </div>
+    </div>
  -->
-		<h1>Companies <span id="numCompanies"></span> Jobs <span id="numJobs"></span></h1>
-		<input type = "checkbox" id ="chkHiring">Hiring only
-		<div class="container-fluid">
-			<ul id="jobsList">
-			</ul>
-		</div>
+
+    <h1 class="text-center">Companies <span id="numCompanies"></span> Jobs <span id="numJobs"></span></h1>
+	<div class="hiring-toggle">
+		<input type="checkbox" id="chkHiring" onclick="toggleHiring()">Show Current Openings Only
+	</div>
+	<div id="jobsList" class="container-fluid">
 	</div>
 </div>
 <!-- END WP piece -->
