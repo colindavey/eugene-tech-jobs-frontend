@@ -10,9 +10,9 @@ Allows filtering to only show companies with open jobs.
 
 Can get data from various data sources:
 
--- Silicon Shire database. 
--- Technology Association of Oregon. 
--- Google Doc using JSON. 
+- Silicon Shire database. 
+- Technology Association of Oregon. 
+- Google Doc using JSON. 
 
 To change data source, edit db variable. 
 
